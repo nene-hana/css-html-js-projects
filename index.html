@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web Lab | My Projects</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #101014;
+            color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            padding: 40px 8%;
+        }
+
+        header {
+            margin-bottom: 60px;
+        }
+
+        header p {
+            color: #999;
+            margin-top: 12px;
+        }
+
+        .tag {
+            color: #a78bfa;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: clamp(35px, 6vw, 60px);
+            letter-spacing: -2px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1b1b22;
+            border: 1px solid #30303a;
+            border-radius: 14px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #a78bfa;
+        }
+
+        .number {
+            color: #a78bfa;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .tech {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            color: #101014;
+            background: #a78bfa;
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .card a:hover {
+            background: #c4b5fd;
+        }
+
+        footer {
+            margin-top: 70px;
+            padding-top: 20px;
+            border-top: 1px solid #30303a;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="tag">Personal Web Lab / 2026</div>
+
+        <h1>Things I've<br>Built on the Web.</h1>
+
+        <p>A growing collection of experiments, ideas, and projects
+           built with HTML, CSS, and JavaScript.</p>
+    </header>
+
+
+    <main class="projects">
+
+        <!-- PROJECT 01 -->
+        <div class="card">
+            <div class="number">PROJECT / 01</div>
+
+            <h2>Color Palette Generator</h2>
+
+            <p>
+                Generate random color palettes, explore combinations,
+                and copy HEX codes for your next design.
+            </p>
+
+            <div class="tech">HTML · CSS · JavaScript</div>
+
+            <a href="./color-palette-generator/">
+                https://nene-hana.github.io/css-html-js-projects/Colour-palette
+            </a>
+        </div>
+
+
+        <!-- PROJECT 02 -->
+        <div class="card">
+            <div class="number">PROJECT / 02</div>
+
+            <h2>Coming Soon</h2>
+
+            <p>
+                Another experiment is currently in the works.
+                Check back as the lab grows.
+            </p>
+
+            <div class="tech">HTML · CSS · JavaScript</div>
+
+            <a href="#" onclick="return false;">
+                In Progress
+            </a>
+        </div>
+
+
+        <!-- PROJECT 03 -->
+        <div class="card">
+            <div class="number">PROJECT / 03</div>
+
+            <h2>Coming Soon</h2>
+
+            <p>
+                New ideas, small tools, and web experiments
+                will find their home here.
+            </p>
+
+            <div class="tech">More experiments soon</div>
+
+            <a href="#" onclick="return false;">
+                In Progress
+            </a>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>Built while learning. Updated as I build more.</p>
+    </footer>
+
+</body>
+</html>
