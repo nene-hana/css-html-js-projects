@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Palette Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Black+Ops+One&family=Happy+Monkey&family=Syne+Tactile&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Syne Tactile", cursive;
+      }
+
+      body {
+        background: linear-gradient(140deg, #d4c556, #afbc19);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: rgb(67, 65, 33);
+        border-radius: 1rem;
+        padding: 2rem;
+        width: 100%;
+        max-width: 880px;
+        box-shadow: 0 10px 25px black;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #b8b84c;
+        text-shadow: 0 2px 5px black;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      h1::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 3px;
+        background-color: #b8b84c;
+        border-radius: 2px;
+      }
+
+      #generate-btn {
+        background: linear-gradient(45deg, #dcc61e, #afbc19);
+        padding: 0.2rem 0.8rem;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      #generate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #generate-btn:active {
+        transform: translateY(0);
+      }
+
+      .palette-container {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+
+      .color-box {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 1px 5px black;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .color-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .color {
+        height: 120px;
+        cursor: pointer;
+      }
+
+      .color-info {
+        background-color: white;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .hex-value {
+        font-weight: 1000;
+        letter-spacing: 1px;
+      }
+
+      .copy-btn {
+        cursor: pointer;
+        color: black;
+        transition: color 0.2s ease-in-out;
+      }
+
+      .copy-btn:hover {
+        color: grey;
+      }
+
+      @media (max-width: 600px) {
+        .palette-container {
+          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Color Palette Generator</h1>
+      <button id="generate-btn">
+        <i class="fas fa-sync-alt"></i> Generate Palette
+      </button>
+
+      <div class="palette-container">
+        <div class="color-box">
+          <div class="color" style="background-color: white"></div>
+          <div class="color-info">
+            <span class="hex-value">#E1F5FE</span>
+            <i class="far fa-copy copy-btn" title="Copy to clipboard"></i>
+          </div>
+        </div>
+        <div class="color-box">
+          <div class="color" style="background-color: #b3e5fc"></div>
+          <div class="color-info">
+            <span class="hex-value">#B3E5FC</span>
+            <i class="far fa-copy copy-btn" title="Copy to clipboard"></i>
+          </div>
+        </div>
+        <div class="color-box">
+          <div class="color" style="background-color: #81d4fa"></div>
+          <div class="color-info">
+            <span class="hex-value">#81D4FA</span>
+            <i class="far fa-copy copy-btn" title="Copy to clipboard"></i>
+          </div>
+        </div>
+        <div class="color-box">
+          <div class="color" style="background-color: #4fc3f7"></div>
+          <div class="color-info">
+            <span class="hex-value">#4FC3F7</span>
+            <i class="far fa-copy copy-btn" title="Copy to clipboard"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const generateBtn = document.querySelector("#generate-btn");
+      const paletteContainer = document.querySelector(".palette-container");
+
+      generateBtn.addEventListener("click", generatePalette);
+
+      paletteContainer.addEventListener("click", (event) => {
+        if (!event.target.classList.contains("copy-btn")) return;
+
+        const hexValue = event.target.previousElementSibling.textContent;
+        navigator.clipboard.writeText(hexValue)
+          .then(() => alert(`Copied ${hexValue} to clipboard!`))
+          .catch((error) => console.error("Failed to copy:", error));
+      });
+
+      function generatePalette() {
+        const colors = [];
+
+        for (let i = 0; i < 4; i++) {
+          colors.push(generateRandomColor());
+        }
+
+        updatePaletteDisplay(colors);
+      }
+
+      function generateRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+
+        return color;
+      }
+
+      function updatePaletteDisplay(colors) {
+        const colorBoxes = document.querySelectorAll(".color-box");
+
+        colorBoxes.forEach((box, index) => {
+          const color = colors[index];
+          box.querySelector(".color").style.backgroundColor = color;
+          box.querySelector(".hex-value").textContent = color;
+        });
+      }
+
+      generatePalette();
+    </script>
+  </body>
+</html>
