@@ -11,7 +11,7 @@ I built this project to practice JavaScript DOM manipulation, event handling, an
 
 ## 🌐 Live Demo
 
-🔗 **Live Website:** [Add Your GitHub Pages Link Here]
+🔗 **Live Website:** [colour palette](https://nene-hana.github.io/css-html-js-projects/Colour-palette)
 
 
 
